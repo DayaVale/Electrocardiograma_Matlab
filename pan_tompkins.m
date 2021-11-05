@@ -23,17 +23,19 @@ function [y_m, y_d] = pan_tompkins(Fs,val,t)
     int_c = 4/(Fs*1/40);
     b1 = interp1(1:5,[1 2 0 -2 -1].*(1/8)*Fs,1:int_c:5);
     y_d = filter(b1,1,y1);
-    y_d = y_d/max(abs(y_d));
+    y_d = y_d./max(abs(y_d));
     plot(t,y_d)
 
     %Square 
 
     y_s = y_d.^2;
+    y_s = y_s./max(abs(y_s));
     %plot(t,y_s)
 
     % Integración 
     m = round(0.150*Fs);
     y_m = conv(y_s ,ones(1 ,m)/m);
+    y_m = y_m./max(abs(y_m));
     L = length(y_m);
     T = L/Fs; 
     t = linspace(0, T, L);
