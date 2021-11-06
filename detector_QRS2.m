@@ -1,4 +1,4 @@
-function detector_QRS2 (senal_I,senal_F,fs)
+function[tI,tF,picostime_qrs,complejos_qrs,PEAKQRS,PEAKtime] = detector_QRS2 (senal_I,senal_F,fs)
     % Datos de la señal integrada
     LI = length(senal_I);
     TI = LI/fs;        
@@ -124,7 +124,7 @@ function detector_QRS2 (senal_I,senal_F,fs)
              if PEAKI > THRESHOLDI2
                 win2 = senal_F(IDEXT(i)-round(0.15*fs):IDEXT(i));
                 t2 = tF(IDEXTI(i)-round(0.15*fs):IDEXTI(i));
-                [pico2 is2] = max(win2);
+                [pico2, is2] = max(win2);
                 if pico2 > THRESHOLDF2
                     complejos_qrs(indp) = pico2; %Complejos qrs
                     picostime_qrs(indp) = t2(is2); % tiempo de los complejos qrs
@@ -159,46 +159,5 @@ function detector_QRS2 (senal_I,senal_F,fs)
         reanalis = 0;
     end
     
-    %------------------------ Grafica -------------------------
-    parar = 0;
-    k = 1;
-    u = 1;
-    
-    subplot(2,1,1)
-    h = animatedline;
-    axis([0,21,0,1])
-    
-    while(k <= length(senal_I))
-        addpoints(h,tI(k),senal_I(k));
-        hold on
-        if u <= length(PEAKtime)
-            if tI(k) == PEAKtime(u)
-                    plot(PEAKtime(u),PEAKQRS(u),'O')
-                    u = u+1;
-            end
-        end    
-        k = k+1;
-        drawnow 
-        pause(0.00000001)
-    end     
-    
-    k = 1;
-    u = 1;
-    subplot(2,1,2);
-    g = animatedline;
-    axis([0,21,-1,1])
-    
-    while(k <= length(senal_F))
-        addpoints(g,tF(k),senal_F(k));
-        hold on
-        if u <= length(picostime_qrs)
-            if tF(k) == picostime_qrs(u)
-               plot(picostime_qrs(u),complejos_qrs(u),'O')
-               u = u+1;
-            end
-        end    
-        k = k+1;
-        drawnow 
-        pause(0.000000001)
-    end  
+   
 end
