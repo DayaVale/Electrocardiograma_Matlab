@@ -1,8 +1,8 @@
 clear all
-structur = load('Muestras\PruebaECG_1','-mat');
-%load('ECG_sample_noisy','-mat')
-Fs = structur.Fs;
-val = structur.val;
+%structur = load('Muestras\PruebaECG_1','-mat');
+load('103m','-mat')
+Fs = 360;
+%val = structur.val;
 L = length(val);
 %plot(val)
 T = L/Fs;        
@@ -10,10 +10,16 @@ T = L/Fs;
 t = linspace(0, T, L);
 plot(t,val)
 
-%[y_m,y_d] = pan_tompkins(Fs,val);
+[y_m,y_d] = pan_tompkins(Fs,val);
 %plot(y_d)
-%[tI,tF,picostime_qrs,complejos_qrs,PEAKQRS,PEAKtime] = detector_QRS2(y_m,y_d,Fs);
+[tI,tF,picostime_qrs,complejos_qrs,PEAKQRS,PEAKtime] = detector_QRS2(y_m,y_d,Fs);
 %detectorQRS(y_m,y_d,Fs)
+
+%plot(tF,y_d)
+
+
+% Verdader tiempos 
+
 
 %%% Referencias
 % https://en.wikipedia.org/wiki/Pan%E2%80%93Tompkins_algorithm

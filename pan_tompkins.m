@@ -2,14 +2,15 @@ function [y_m, y_d] = pan_tompkins(Fs,val)
     % Primer paso Filtrado
     % Filto paso bajo corte en 11 Hz
     Wn1 = 11/(Fs/2);
-    n = 3; %Orden 
+    n = 2; % Segundo orden
     [b,a] = butter(n,Wn1,"low");
     y = filter(b,a,val);
-    %y = y./max(abs(y));
+    y = y./max(abs(y));
 
     % Filtro pasa altos corte en 5 Hz
+    n2 = 1; % Primer orden
     Wn2 = 5/(Fs/2); 
-    [b,a] = butter(n,Wn2,"High");
+    [b,a] = butter(n2,Wn2,"High");
     y1 = filter(b,a,y);
     y1 = y1./max(abs(y1));
   
