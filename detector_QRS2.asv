@@ -143,7 +143,7 @@ function[tI,tF,picostime_qrs,complejos_qrs,PEAKQRS,PEAKtime] = detector_QRS2 (se
                RR_AVERAGE1 = (0.125)*(sum(RRn));
                RR_prima1 = RRn(RRn >= RR_LOW);
                RR_prima = RR_prima1(RRn <= RR_HIGH);
-              if length(RR_prima) > 8
+        n      if length(RR_prima) > 8
                    RR_AVERAGE2 = (0.125)*(sum(RR_prima));
                end  
            end  
