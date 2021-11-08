@@ -112,20 +112,31 @@ function detectorQRS(senal_I,senal_F,fs)
         index = index +1;
     end
     
-    subplot(2,1,1);
-    plot(tI,senal_I)
-    hold on
-    plot(picos_qrs,complejos_qrs,'*')
-    plot(picos_qrs,SPKI_list,'o')
-    plot(picos_noise,NPKI_list,'-*')
-    plot(tI(IDEXTI),THRESHOLDI1_list,'x')
-    hold off
     
-    subplot(2,1,2);
+    
+    subplot(2,1,1);
     plot(tF,senal_F)
+    xlim([0,21])
     hold on
     plot(indtime_pqrs,complejosQRS,'*')
     hold off
+    title('\textbf{Filtrada}', 'Interpreter', 'latex')
+    xlabel('\textbf{Tiempo}  \textit{[sec]}', 'Interpreter','latex')
+    ylabel('\textbf{Amplitud} \textit{[mV]} ', 'Interpreter','latex')
+    
+    subplot(2,1,2);
+    plot(tI,senal_I)
+    xlim([0,21])
+    hold on
+    plot(picos_qrs,complejos_qrs,'*')
+    %plot(picos_qrs,SPKI_list,'o')
+    %plot(picos_noise,NPKI_list,'-*')
+    %plot(tI(IDEXTI),THRESHOLDI1_list,'x')
+    hold off
+    grid on
+    title('\textbf{Integrada}', 'Interpreter', 'latex')
+    xlabel('\textbf{Tiempo}  \textit{[sec]}', 'Interpreter','latex')
+    ylabel('\textbf{Amplitud} \textit{[mV]} ', 'Interpreter','latex')
     
     
 end

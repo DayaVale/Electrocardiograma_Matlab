@@ -1,22 +1,30 @@
 clear all
-%structur = load('Muestras\PruebaECG_1','-mat');
-load('103m','-mat')
-Fs = 360;
-%val = structur.val;
+structur = load('Muestras\PruebaECG_7','-mat');
+%load('14149m','-mat')
+Fs = structur.Fs;
+val = structur.val;
 L = length(val);
 %plot(val)
 T = L/Fs;        
 %f_complete = (-L/2:L/2-1)*Fs/L;
 t = linspace(0, T, L);
 plot(t,val)
+xlim([0,20])
+grid on
+title('\textbf{Original}', 'Interpreter', 'latex')
+xlabel('\textbf{Tiempo}  \textit{[sec]}', 'Interpreter','latex')
+ylabel('\textbf{Amplitud} \textit{[mV]} ', 'Interpreter','latex')
+
+%%
 
 [y_m,y_d] = pan_tompkins(Fs,val);
 %plot(y_d)
 [tI,tF,picostime_qrs,complejos_qrs,PEAKQRS,PEAKtime] = detector_QRS2(y_m,y_d,Fs);
-%detectorQRS(y_m,y_d,Fs)
+detectorQRS(y_m,y_d,Fs)
 
-%plot(tF,y_d)
 
+plot(tF,y_d)
+xlim([0,20])
 
 % Verdader tiempos 
 
