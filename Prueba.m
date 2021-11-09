@@ -1,5 +1,5 @@
 clear all
-structur = load('Muestras\PruebaECG_7','-mat');
+structur = load('Muestras\PruebaECG_8','-mat');
 %load('14149m','-mat')
 Fs = structur.Fs;
 val = structur.val;
@@ -9,7 +9,7 @@ T = L/Fs;
 %f_complete = (-L/2:L/2-1)*Fs/L;
 t = linspace(0, T, L);
 plot(t,val)
-xlim([0,20])
+xlim([0,10])
 grid on
 title('\textbf{Original}', 'Interpreter', 'latex')
 xlabel('\textbf{Tiempo}  \textit{[sec]}', 'Interpreter','latex')
